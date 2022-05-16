@@ -1,0 +1,47 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    <hr/>
+
+    {% for item in Activos %}
+
+      {% if item.uuid_auction_user not in listClosedAuctions %}
+        <div class="caja_auction" style="background-image: url('{% static 'auctions/background_cards.png' %}'); background-repeat: no-repeat; background-position: center; background-size: 100% 100%;">
+          <div class="caja_imagen">
+            <a href="{% url 'bids' uuid_product=item.uuid_auction_user %}">
+              <img src="{{ item.url_dir }}" alt="load image" height="200" width="300">
+            </a>
+          </div>
+          <div class="caja_datos">
+            <a href="{% url 'bids' uuid_product=item.uuid_auction_user %}">
+              <strong><label class="title">{{ item.product_name }}</label></strong>
+            </a>
+            <a href="{% url 'bids' uuid_product=item.uuid_auction_user %}">
+              <strong><label>Price: <label class="price">${{ item.cost }}</label></label></strong>
+            </a>
+          </div>
+        </div>
+      {% else %}
+        <div class="caja_auction" style="background-image: url('{% static 'auctions/background_cards.png' %}'); background-repeat: no-repeat; background-position: center; background-size: 100% 100%;">
+          <div class="caja_imagen">
+            <a href="{% url 'Finished' uuid_product=item.uuid_auction_user %}">
+              <img src="{{ item.url_dir }}" alt="load image" height="200" width="300">
+            </a>
+          </div>
+          <div class="caja_datos">
+            <a href="{% url 'Finished' uuid_product=item.uuid_auction_user %}">
+              <strong><label class="title">{{ item.product_name }}</label></strong>
+            </a>
+            <div id="Editar_watchlist_bid">
+              <label class="bidClosed">Auction Closed</label>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+
+    {% endfor %}
+
+{% endblock %}

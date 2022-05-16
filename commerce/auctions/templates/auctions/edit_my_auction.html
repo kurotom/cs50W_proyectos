@@ -1,0 +1,19 @@
+{% extends "auctions/layout.html"%}
+{% load static %}
+
+{% block body %}
+
+  <h2>Editing: {{ name_product }} </h2>
+  <hr>
+
+  <div class="caja_form" style="background-image: url('{% static 'auctions/old-weathered-paper.png' %}'); background-repeat: no-repeat; background-position: center; background-size: 100% 100%;">
+    <form id="CreateForm" action="{% url 'edit_my_auctions' uuid_auction=uuid %}" method="POST">
+      {% csrf_token %}
+      {{ Editar_mi_auction }}
+      <div class="divinput">
+        <input type="submit" value="Save my auction">
+      </div>
+    </form>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <h3>All Posts</h3>
+
+    <hr>
+    <div id="advice">
+      <p>To post you need to <a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">register</a></p>
+      </div>
+    <hr>
+
+    <div id="allPost">
+      {% for item in data %}
+          <div class="divPost">
+
+            <div>
+              <label id="idpost" hidden>{{ item.id }}</label>
+            </div>
+
+            <div class="user">
+              <a href="{% url 'userview' username=item.user %}"><label id="user">{{ item.user }}</label></a>
+            </div>
+
+            <div class="content">
+              <div class="text">
+                <label>{{ item.text }}</label>
+              </div>
+              {% if item.edited|stringformat:"s" == "yes" %}
+                <div class="edited">
+                  <label>edited</label>
+                </div>
+              {% endif%}
+            </div>
+
+            <div class="infoContent">
+              <div class="likes">
+                <div>
+                  {% if item.iamLiked|stringformat:"s" == "yes" %}
+                  <img id="heart" value="yes" src="/static/network/red-heart.svg" width="20" height="20" />
+                  {% else %}
+                  <img id="heart" value="no" src="/static/network/black-heart.svg" width="20" height="20" />
+                  {% endif %}
+                  <label>Likes: {{ item.likes }}</label>
+                </div>
+              </div>
+              <div class="timestamp">
+                <label>{{ item.timestamp }}</label>
+              </div>
+            </div>
+          </div>
+      {% endfor %}
+    </div>
+
+    <div class="pagination">
+      <span class="step-links">
+        {% if data.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ data.obj.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+          Page {{ data.number }} of {{ data.paginator.num_pages }}
+        </span>
+
+        {% if data.has_next %}
+          <a href="?page={{ data.next_page_number }}">next</a>
+          <a href="?page={{ data.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+      </span>
+    </div>
+
+{% endblock %}

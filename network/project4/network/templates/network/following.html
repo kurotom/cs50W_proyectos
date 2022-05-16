@@ -1,0 +1,82 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <script src='{% static "network/network.js" %}'></script>
+
+    <h3><strong>Followings</strong></h3>
+
+    {% if user.is_authenticated %}
+      <hr/>
+
+      <div id="userPost">
+        {% for item in dataFollow %}
+          <div class="postFollowing">
+            <label id="idpost" hidden>{{ item.id }}</label>
+
+            <div>
+              <a href="{% url 'userview' username=item.user %}"><label id="user">{{ item.user }}</label></a>
+            </div>
+
+
+            <div class="content">
+              <div class="text">
+                <label>{{ item.text }}</label>
+              </div>
+              {% if item.edited|stringformat:"s" == "yes" %}
+                <div class="edited">
+                  <label>edited</label>
+                </div>
+              {% endif%}
+            </div>
+
+            <div class="infoContent">
+              <div class="likes">
+                <div>
+                  {% if item.iliked|stringformat:"s" == "yes" %}
+                  <img id="heart" value="{{ item.id }}" src="/static/network/red-heart.svg" width="20" height="20" />
+                  {% else %}
+                  <img id="heart" value="{{ item.id }}" src="/static/network/black-heart.svg" width="20" height="20" />
+                  {% endif %}
+                  <label>Likes: {{ item.likes }}</label>
+                </div>
+              </div>
+              <div class="timestamp">
+                <label>{{ item.timestamp }}</label>
+              </div>
+            </div>
+          </div>
+
+
+        {% endfor %}
+
+        <div class="pagination">
+          <span class="step-links">
+            {% if dataFollow.has_previous %}
+              <a href="following?page=1">&laquo; first</a>
+              <a href="following?page={{ dataFollow.obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="current">
+              Page {{ dataFollow.number }} of {{ dataFollow.paginator.num_pages }}
+            </span>
+
+            {% if dataFollow.has_next %}
+              <a href="following?page={{ dataFollow.next_page_number }}">next</a>
+              <a href="following?page={{ dataFollow.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+          </span>
+        </div>
+      </div>
+
+    {% else %}
+      <hr/>
+      <div>
+        NO autenticado
+        TODO
+      </div>
+
+
+    {% endif %}
+
+{% endblock %}

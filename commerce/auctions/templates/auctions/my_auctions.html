@@ -1,0 +1,56 @@
+{% extends "auctions/layout.html"%}
+{% load static %}
+
+{% block body %}
+
+  <h2>My auctions</h2>
+  <hr>
+
+  {% for item in lista_productos %}
+    <div class="caja_auction" style="background-image: url('{% static 'auctions/background_cards.png' %}'); background-repeat: no-repeat; background-position: center; background-size: 100% 100%;">
+      <div class="caja_imagen">
+
+        {% if item.uuid_auction_user not in isFinishedmyBid %}
+          <a href="{% url 'edit_my_auctions' uuid_auction=item.uuid_auction_user %}">
+            <img src="{{ item.url_dir }}" alt="load image" height="200" width="300">
+          </a>
+        {% else %}
+          <a href="{% url 'Finished' uuid_product=item.uuid_auction_user %}">
+            <img src="{{ item.url_dir }}" alt="load image" height="200" width="300">
+          </a>
+        {% endif %}
+
+
+      </div>
+      <div class="caja_datos">
+        <a href="">
+          <strong><label class="title">{{ item.product_name }}</label></strong>
+        </a>
+        <a href="">
+          <strong><label>Price: <label class="price">${{ item.cost }}</label></label></strong>
+        </a>
+      </div>
+    </div>
+  {% empty %}
+    <div class="my_auctions_empty">
+      <div>
+        You don't have auctions.
+      </div>
+      <div class="links_auctions_list_create">
+        <div id="div_icon_GotoAuctionList">
+          <a href="{% url 'index' %}" title="Go to auction list">
+            <img src="{% static 'auctions/icons/auction.png' %}">
+          </a>
+        </div>
+        <div id="div_icon_CreateAuction">
+          <a href="{% url 'create_listing' %}" title="Create auction">
+            <img src="{% static 'auctions/icons/create-auction.png' %}">
+          </a>
+        </div>
+      </div>
+    </div>
+
+  {% endfor %}
+
+
+{% endblock %}

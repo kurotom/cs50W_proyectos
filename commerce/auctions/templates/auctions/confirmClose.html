@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+  <div id="StilePageConfirmClose">
+    <div class="CloseImage">
+      <label>{{ productName }}</label>
+      <img src="{{ imageUrl }}" alt="load image" height="300" width="400">
+    </div>
+    <form action="{% url 'CloseConfirm' uuid_product=uid %}" method="POST" style="display: flex;flex-direction: column;">
+      {% csrf_token %}
+      {{ formulario }}
+      <input type="submit" value="Commit delete">
+    </form>
+  </div>
+
+  <div class="caja_emptyWatchlist">
+    <div id="divGotoAuctionList">
+      <a href="{% url 'bids' uuid_product=uid %}" title="I want to come back">
+        <img src="{% static 'auctions/icons/auction.png' %}">
+      </a>
+    </div>
+  </div>
+
+{% endblock %}

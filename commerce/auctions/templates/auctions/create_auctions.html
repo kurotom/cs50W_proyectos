@@ -1,0 +1,23 @@
+{% extends "auctions/layout.html"%}
+{% load static %}
+
+
+{% block body %}
+
+  <h2>Create your bid</h2>
+  <hr>
+
+  <div class="caja_form" style="background-image: url('{% static 'auctions/old-weathered-paper.png' %}'); background-repeat: no-repeat; background-position: center; background-size: 100% 100%;">
+    <form id="CreateForm" action="{% url 'create_listing' %}" method="POST">
+      {% csrf_token %}
+      {% if formatImageNOTsupported != "" %}
+        {{ formatImageNOTsupported }}
+      {% endif %}
+      {{ formulario }}
+      <div class="divinput">
+        <input id="submit_Form" type="submit" value="Save my auction">
+      </div>
+    </form>
+  </div>
+
+{% endblock %}

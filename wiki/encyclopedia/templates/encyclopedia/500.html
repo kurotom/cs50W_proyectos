@@ -1,0 +1,13 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    500 - Server Internal Error!
+{% endblock %}
+
+{% block body %}
+    <h1>Error somewhere on the server? Where will it be?</h1>
+
+    <body>
+	    <a href="{% url 'index' %}">Home</a>
+    </body>
+{% endblock %}

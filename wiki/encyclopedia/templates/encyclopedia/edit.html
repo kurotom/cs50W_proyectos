@@ -1,0 +1,24 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Edit Wiki
+{% endblock %}
+
+{% block body %}
+	<div class="caja_title">
+		<label>Editing <strong>{{ title_file }}</strong></label>
+	</div>
+	<div class="formulario">
+		<form action="{% url 'name_title' name_title=title_file %}" method="POST">
+			{% csrf_token %}
+	
+			{{ formulario_edit }}
+			<div class="caja_btn_submit">
+				<input class="btn_submit" type="submit" value="Save">
+				<div class="links">
+					<a href="{% url 'index' %}">Home</a>
+				<div>
+			</div>
+		</form>
+	</div>
+{% endblock %}

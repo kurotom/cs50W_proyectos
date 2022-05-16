@@ -1,0 +1,31 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Add Your Wiki
+{% endblock %}
+
+{% block body %}
+	<div class="formulario">
+		<form action="{% url 'new_wiki' %}" method="POST">
+			{% csrf_token %}
+			{% if messages %}
+			<ul class="messages">
+				{% for message in messages %}
+				<li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+					{{ message  }}
+				</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			<div class="caja_formulario">	
+				{{ formulario }}
+			</div>
+			<div class="caja_btn_submit">
+				<input class="btn_submit" type="submit" value="Save">
+				<div class="links">
+					<a href="{% url 'index' %}">Home</a>
+				<div>
+			</div>
+		</form>
+	</div>
+{% endblock %}

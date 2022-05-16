@@ -1,0 +1,16 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+	Suggested search
+{% endblock %}
+
+{% block body %}
+	<h1>We found these possible matches:</h1>
+
+	<ul>
+		{% for itm in items %}
+		<a href="{% url 'busqueda' busqueda=itm %}"><li>{{ itm }}</li></a>
+			
+		{% endfor %}
+	<ul>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+  <script src='{% static "network/network.js" %}'></script>
+
+  <h3>User <strong>{{username}}</strong></h3>
+
+
+  {% if ifollow|stringformat:"s" == "yes" %}
+    <button id="follow" value="{{ username }}">following</button>
+  {% else %}
+    <button id="follow" value="{{ username }}">follow</button>
+  {% endif %}
+
+
+  {% for item in ItemContent %}
+
+    <div class="divPost">
+
+      <div>
+        <label id="idpost" hidden>{{ item.id }}</label>
+      </div>
+
+      <div class="user">
+        <a href="{% url 'userview' username=item.user %}"><label id="user">{{ item.user }}</label></a>
+      </div>
+
+      <div class="content">
+        <div class="text">
+          <label>{{ item.text }}</label>
+        </div>
+        {% if item.edited|stringformat:"s" == "yes" %}
+        <div class="edited">
+          <label>edited</label>
+        </div>
+        {% endif%}
+      </div>
+
+      <div class="infoContent">
+        <div class="likes">
+          <div>
+            {% if item.iamLiked|stringformat:"s" == "yes" %}
+            <img id="heart" value="yes" src="/static/network/red-heart.svg" width="20" height="20" />
+            {% else %}
+            <img id="heart" value="no" src="/static/network/black-heart.svg" width="20" height="20" />
+            {% endif %}
+            <label>Likes: {{ item.likes }}</label>
+          </div>
+        </div>
+        <div class="timestamp">
+          <label>{{ item.timestamp }}</label>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+
+
+
+
+  <div class="pagination">
+    <span class="step-links">
+      {% if ItemContent.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ ItemContent.obj.previous_page_number }}">previous</a>
+      {% endif %}
+      <span class="current">
+        Page {{ ItemContent.number }} of {{ ItemContent.paginator.num_pages }}
+      </span>
+
+      {% if ItemContent.has_next %}
+        <a href="?page={{ ItemContent.next_page_number }}">next</a>
+        <a href="?page={{ ItemContent.paginator.num_pages }}">last &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
+
+
+{% endblock %}

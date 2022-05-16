@@ -1,0 +1,118 @@
+.google-blue {
+	color: #4285F4
+}
+.google-yellow {
+	color: #F4B400
+}
+.google-green {
+	color: #0F9D58
+}
+.google-red {
+	color: #DB4437
+}
+#links {
+	font-family: arial,sans-serif;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	margin-right: 50px;
+}
+#links a {
+	font-family: arial,sans-serif;
+	margin: 10px;
+	padding: 5px;
+	text-decoration: none;
+	color: rgba(0,0,0,0.87);
+	font-size: 12px;
+}
+#links a:hover {
+	font-family: arial,sans-serif;
+	text-decoration: underline
+}
+
+#google-image {
+	font-family: arial,sans-serif;
+	padding-left: 1px;
+	font-size: 40px;
+	margin-top: 40px;
+	margin-bottom: -18px;
+	text-shadow: 2px 3px 5px lightgray;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+#google-image h5 {
+	font-family: arial,sans-serif;
+  font-weight: lighter;
+	color: #4285f4;
+	margin-left: -62px;
+	margin-bottom: 44px;
+	align-self: flex-end;
+	font-size: 18px;
+}
+
+.caja_search {
+	font-family: arial,sans-serif;
+	display: grid;
+	justify-items: center;
+	grid-template-areas:
+	"entrada_formulario"
+	"boton_formulario";
+}
+#lupa_input {
+  height: 44px;
+  display: grid;
+  align-items: center;
+  grid-template-areas:
+  "lupa input btn";
+}
+
+#lupa_search {
+  filter: invert(66%) sepia(8%) saturate(251%) hue-rotate(169deg) brightness(96%) contrast(88%);
+  height: 24px;
+  width: 24px;
+  grid-area: lupa;
+  position: relative;
+  left: 40px;
+}
+
+#btn_lupa, #lupa_2 {
+  font-family: arial,sans-serif;
+  line-height: 24px;
+  grid-area: btn;
+  position: relative;
+  left: -44px;
+  border: none;
+  background: none;
+}
+#btn_lupa {
+  height: 44px;
+  width: 44px;
+  z-index: 2;
+  background-color: none;
+}
+#btn_lupa:hover {
+  cursor: pointer;
+}
+#lupa_2 {
+  filter: invert(51%) sepia(74%) saturate(3762%) hue-rotate(201deg) brightness(100%) contrast(92%);
+  height: 24px;
+  width: 24px;
+  z-index: 1;
+}
+
+#text {
+  font-family: arial,sans-serif;
+  width: 530px;
+  height: 39px;
+  padding-left: 50px;
+  border-radius: 24px;
+  border: 1px solid lightgray;
+  font-size: 16px;
+
+}
+#text:hover {
+  box-shadow: 0px 0px 10px lightgray;
+}

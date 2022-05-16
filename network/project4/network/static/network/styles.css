@@ -1,0 +1,140 @@
+.body {
+  margin-bottom: 20px;
+}
+
+h3 {
+  margin-left: 5%;
+  font-weight: bold;
+}
+
+#advice {
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+}
+#advice a {
+  font-weight: bold;
+  text-decoration: none;
+  text-shadow: 0px 1px 2px salmon;
+}
+
+#userPost .postFollowing {
+  margin-bottom: 10px;
+  border: 1px solid lightgrey;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding: 10px 20px 10px 5%;
+}
+
+#formPost {
+  display: flex;
+  justify-content: center;
+}
+
+#formPost #form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 150px;
+}
+
+#editPosts {
+  justify-content: center;
+}
+
+#editPosts #formEdit {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 150px;
+}
+
+
+
+.divPost {
+  margin-bottom: 10px;
+  border: 1px solid lightgrey;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding: 10px 20px 10px 5%;
+}
+
+#user {
+  font-weight: bold;
+}
+
+#user:hover {
+  cursor: pointer;
+}
+
+#heart {
+  margin-right: 5px;
+}
+#heart:hover {
+  cursor: pointer;
+
+}
+
+.content {
+  margin-bottom: 5px;
+}
+
+.text {
+  font-size: 25px;
+  margin-bottom: -10px;
+}
+
+
+.boxedit {
+    display: flex;
+    flex-direction: row;
+}
+.edited {
+  font-size: 14px;
+  margin-left: 20px;
+  padding: 6px 9px 0px 10px;
+}
+#edit {
+  border: 0px;
+  padding: 3px 10px 3px 10px;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: bold;
+  color: darkturquoise;
+}
+
+#follow {
+  border: 0px;
+  padding: 3px 10px 3px 10px;
+  background-color: #f7f7f7;
+  font-size: 18px;
+  font-weight: bold;
+  color: gray;
+  margin-left: 6%;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+#follow:hover {
+  background-color: #eee;
+  border-radius: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.infoContent {
+  display: flex;
+  flex-direction: row;
+}
+
+.likes {
+  margin-right: 3%;
+  margin-left: 5%;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}

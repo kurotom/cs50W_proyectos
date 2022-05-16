@@ -1,0 +1,172 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+  <div class="caja_bid_1">
+    <div class="image_bid">
+      <img src="{{ img_url }}" alt="load image" height="300" width="400">
+    </div>
+  </div>
+
+  <div class="caja_bid_2">
+    <div class="info_caja_bid_2">
+      <p id="offers">
+        <label><strong>{{ cant_offers }} </strong>bid(s) so far.</label>
+      </p>
+
+      <p id="bidders">
+        <label>
+          {% if bidders > 1 %}
+            Bidders: {{ bidders }}.
+          {% elif bidders == 1 %}
+            Bidder: {{ bidders }}.
+          {% elif bidders == 0 %}
+            No Bidders.
+          {% endif %}
+        </label>
+      </p>
+
+      <p id="topbid">
+        <label>
+          {% if TopUser == request.user %}
+            <strong>Your bid is the highest</strong>.
+          {% endif %}
+        </label>
+      </p>
+    </div>
+    {% if uid not in uuiInCloseList %}
+      <div id="Editar_watchlist_bid">
+        {% if user.is_authenticated %}
+          {% if username == request.user %}
+            <div class="Box_Edit_Close_Bid">
+              <div>
+                <a href="{% url 'edit_my_auctions' uuid_auction=uid %}">
+                  <label>Editar</label>
+                </a>
+              </div>
+
+              <div>
+                <a href="{% url 'CloseConfirm' uuid_product=uid %}">
+                  <label>Close auction</label>
+                </a>
+              </div>
+            </div>
+          {% endif %}
+          <div>
+            <a href="{% url 'watchlist' %}">
+              <label>Watchlist</label>
+            </a>
+          </div>
+        {% else %}
+          <div>
+            <a href="{% url 'login' %}">
+              <label>Log In</label>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    {% else %}
+      <div id="Editar_watchlist_bid">
+        <label class="bidClosed">Auction Closed</label>
+      </div>
+    {% endif %}
+  </div>
+
+
+  <div class="caja_bid_3">
+    {% if uid not in uuiInCloseList %}
+      <div class="form_bid">
+        {% if user.is_authenticated %}
+          <div class="div_form_caja_3">
+            <form action="{% url 'bids' uuid_product=uid %}" method="POST">
+              {% csrf_token %}
+              {% if advertencia != "" %}
+                <p>{{ advertencia }}
+              {% endif %}
+              {{ formulario.as_p }}
+
+              <div id="min_bid_label">
+                {% if offer_top != 0 %}
+                  <label>Min Bid is $ {{ offer_top }}</label>
+                {% endif %}
+              </div>
+
+              <div id="submit_form_bid">
+                <input type="submit" value="Place bid">
+              </div>
+            </form>
+          </div>
+        {% else %}
+          <div id="caja_to_login_bid">
+            <label id="login_to_bid">To be able to bid on this product you must register or log in.</label>
+            <a href="{% url 'login' %}">Log In</a>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="caja_details">
+      <label>Details</label>
+      <ul>
+        <li>
+          <div>
+            Initial cost: <strong>$ {{ cost_initial }}</strong>
+          </div>
+        </li>
+        <li>
+          <div>
+            Auctioned by: <strong>{{ username }}</strong>
+          </div>
+        </li>
+        <li>
+          <div>
+            Category: <strong>{{ category }}</strong>
+          </div>
+        </li>
+        <li>
+          <div>
+            <p>Description:<p>
+            <div class="description">
+              <p>
+                {{ description }}
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  {% if user.is_authenticated %}
+    {% if uid not in uuiInCloseList %}
+      <div class="formCommentsBid">
+        <form  method="POST">
+          {% csrf_token %}
+          {{ fomrulario_comentarios }}
+          <input type="submit" value="Comment">
+        </form>
+      </div>
+    {% endif %}
+  {% else %}
+    <div id="caja_to_login_bid">
+      <label id="login_to_bid">To comment you must register or log in.</label>
+      <a href="{% url 'login' %}">Log In</a>
+    </div>
+  {% endif %}
+
+  <div id="CajaComments">
+    {% for comment in allcomments %}
+      <div class="Commentaries_Box">
+        <div class="comment">
+          <strong>{{ comment.comments }}.</strong> &ensp;&ensp;-- {{ comment.username }}
+        </div>
+      </div>
+    {% empty %}
+      <div class="Commentaries_Box">
+        <label>
+          No comments yet.
+        </label>
+      </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}

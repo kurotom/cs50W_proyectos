@@ -1,0 +1,101 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<div class="caja_bid_1">
+  <div class="image_bid">
+    <img src="{{ img_url }}" alt="load image" height="300" width="400">
+  </div>
+</div>
+
+<div class="caja_bid_2">
+  <div class="info_caja_bid_2">
+    <p id="offers">
+      <label><strong>{{ cant_offers }} </strong>bid(s) so far.</label>
+    </p>
+
+    <p id="bidders">
+      <label>
+        {% if bidders > 1 %}
+          Bidders: {{ bidders }}.
+        {% elif bidders == 1 %}
+          Bidder: {{ bidders }}.
+        {% elif bidders == 0 %}
+          No Bidders.
+        {% endif %}
+      </label>
+    </p>
+
+    <p id="topbid">
+      <label>
+        {% if TopUser == request.user %}
+          <strong>Your bid is the highest</strong>.
+        {% endif %}
+      </label>
+    </p>
+  </div>
+  <div id="Editar_watchlist_bid">
+    <label class="bidClosed">Auction Closed</label>
+  </div>
+</div>
+
+<div class="caja_bid_3">
+  <div class="form_bid">
+    <div class="ResultBidClosed">
+      <label>Awarded by: <strong>{{ finishBid.WinnerBid }}</strong></label>
+      <label>Final price: <strong>{{ finishBid.PriceWinnerBid }}</strong></label>
+    </div>
+  </div>
+
+  <div class="caja_details">
+    <label>Details</label>
+    <ul>
+      <li>
+        <div>
+          Initial cost: <strong>$ {{ cost_initial }}</strong>
+        </div>
+      </li>
+      <li>
+        <div>
+          Auctioned by: <strong>{{ username }}</strong>
+        </div>
+      </li>
+      <li>
+        <div>
+          Category: <strong>{{ category }}</strong>
+        </div>
+      </li>
+      <li>
+        <div>
+          <p>Description:<p>
+          <div class="description">
+            <p>
+              {{ description }}
+            </p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
+  <div id="CajaComments">
+    {% for comment in allcomments %}
+      <div class="Commentaries_Box">
+        <div class="comment">
+          <strong>{{ comment.comments }}.</strong> &ensp;&ensp;-- {{ comment.username }}
+        </div>
+      </div>
+    {% empty %}
+      <div class="Commentaries_Box">
+        <label>
+          No comments yet.
+        </label>
+      </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}

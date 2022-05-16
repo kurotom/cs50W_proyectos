@@ -1,0 +1,57 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+  <h2>Your products followed</h2>
+  <hr>
+
+  {% for item in listwatchlist %}
+    {% if item.uuidAuction.uuid_auction_user not in isFinishedmyBid %}
+      <div class="caja_auction" style="background-image: url('{% static 'auctions/background_cards.png' %}'); background-repeat: no-repeat; background-position: center; background-size: 100% 100%;">
+        <div class="caja_imagen">
+          <a href="{% url 'bids' uuid_product=item.uuidAuction.uuid_auction_user %}">
+            <img src="{{ item.uuidAuction.url_dir }}" alt="load image" height="200" width="300">
+          </a>
+        </div>
+
+        <div class="caja_datos">
+          <a href="{% url 'bids' uuid_product=item.uuidAuction.uuid_auction_user %}">
+            <strong><label class="title">{{ item.uuidAuction.product_name }}</label></strong>
+          </a>
+          <a href="{% url 'bids' uuid_product=item.uuidAuction.uuid_auction_user %}">
+            <strong><label>Price: <label class="price">${{ item.uuidAuction.cost }}</label></label></strong>
+          </a>
+        </div>
+      </div>
+    {% else %}
+      <div class="caja_auction" style="background-image: url('{% static 'auctions/background_cards.png' %}'); background-repeat: no-repeat; background-position: center; background-size: 100% 100%;">
+        <div class="caja_imagen">
+          <a href="{% url 'Finished' uuid_product=item.uuidAuction.uuid_auction_user %}">
+            <img src="{{ item.uuidAuction.url_dir }}" alt="load image" height="200" width="300">
+          </a>
+        </div>
+        <div class="caja_datos">
+          <a href="{% url 'Finished' uuid_product=item.uuidAuction.uuid_auction_user %}">
+            <strong><label class="title">{{ item.uuidAuction.product_name }}</label></strong>
+          </a>
+          <div id="Editar_watchlist_bid">
+            <label class="bidClosed">Auction Closed</label>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% empty %}
+    <div class="caja_emptyWatchlist">
+      <div class="message_empty">
+        <p>Doesn't have any watchlist.</p>
+      </div>
+      <div id="divGotoAuctionList">
+        <a href="{% url 'index' %}" title="Go to auction list">
+          <img src="{% static 'auctions/icons/auction.png' %}">
+        </a>
+      </div>
+    </div>
+  {% endfor %}
+
+{% endblock %}

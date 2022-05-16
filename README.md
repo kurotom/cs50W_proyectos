@@ -2,8 +2,7 @@
 
 Repositorio de proyectos desarrollados en el curso [CS50W](https://cs50.harvard.edu/web/2020/). 
 
-Usando:
-
+Se usó:
 * Python
 * Framework Django
 * JavaScript
